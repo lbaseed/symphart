@@ -1,3 +1,3 @@
 # symphart
-Symfony App \n
-#CRUD Implementation in Symfony.
+Symfony App.
+# CRUD Implementation in Symfony.
