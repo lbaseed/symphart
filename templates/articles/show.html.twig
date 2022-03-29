@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SymphArt Articles{% endblock %}
+
+{% block body %}
+    <h1>{{ article.title }}</h1>
+    
+  
+        <div class="row col-lg-8">
+                <table class="table table-striped table-hover">
+                    
+                    <tbody>
+                       
+                            <tr>
+                                <th>Title</th>
+                                <td>{{ article.title }} </td>
+                                
+                            </tr>
+                            <tr>
+                                <th>Body </th>
+                                <td>{{ article.body }} </td>
+                                
+                            </tr>
+                            
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                                <td> <a href="/article/{{ article.id }}/delete" class="btn btn-danger">Delete</a> </td>
+                                <td> <a href="/article/{{ article.id }}/update" class="btn btn-primary">update</a> </td>
+                                
+                        </tr>
+                    </tfoot>
+                </table>
+                
+        </div>
+        <a href="/" class="btn btn-dark">Go Back</a>
+
+{% endblock %}
