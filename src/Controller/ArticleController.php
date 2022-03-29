@@ -101,6 +101,40 @@
 
 
         }
+
+        /**
+         * @Route("/article/{id}/edit", "edit_article")
+         */
+        public function edit(ManagerRegistry $doctrine, Request $request, $id) {
+
+            $article = $doctrine->getRepository(Article::class)->find($id);
+
+            $form = $this->createFormBuilder($article)
+            ->add("title", TextType::class, ["attr" => ["class" => "form-control"]])
+            ->add("body", TextareaType::class, ["attr" => ["class" => "form-control"], "required" => false ])
+            ->add("save", SubmitType::class, ["attr" => ["class" => "btn btn-primary mt-3"], "label" => "Update"])
+            ->getForm();
+
+            // handle update form
+            $form->handleRequest($request);
+            
+            if($form->isSubmitted() && $form->isValid() ) {
+                $article = $form->getData();
+                
+                $em = $doctrine->getManager();
+                $em->persist($article);
+                $em->flush();
+
+                return $this->redirectToRoute("article_list");
+
+            }
+
+
+            return $this->render("/articles/edit.html.twig", [
+                "form" => $form->createView(),
+                "article"=>$article,
+            ]);
+        }
         
         /**
          * @Route("/article/store", name="article_store")
